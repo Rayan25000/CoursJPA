@@ -3,6 +3,7 @@ package monprojet;
 import java.util.List;
 import java.util.Optional;
 
+import ch.qos.logback.core.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,12 +12,16 @@ import org.springframework.stereotype.Component;
 import lombok.extern.log4j.Log4j2;
 import monprojet.dao.*;
 import monprojet.entity.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Component
 @Log4j2 // Génère le 'logger' pour afficher les messages de trace
 public class ConsoleApp implements CommandLineRunner {
     @Autowired // Auto-initialisé par Spring
     private CountryRepository countryDAO;
+
+
+
 
     @Override
     /*
@@ -55,6 +60,7 @@ public class ConsoleApp implements CommandLineRunner {
         } catch (DataIntegrityViolationException e) {
             log.info("Impossible de supprimer ce pays, il reste toujours {} enregistrements", countryDAO.count());
         }
+
    }
 
     public static void tapezEnterPourContinuer() throws Exception {
